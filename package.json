@@ -1,5 +1,5 @@
 {
-  "name": "@ahmadraza/ai-trust-score",
+  "name": "@ahmadraza100/ai-trust-score",
   "version": "0.1.0",
   "description": "ai-trust-score — deterministic validator for LLM outputs (schema, heuristics, consistency checks)",
   "main": "dist/index.js",
@@ -15,15 +15,15 @@
   "author": "ai-trust-score Contributors <contributors@ai-trust-score.dev>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ahmadraza/ai-trust-score.git"
+    "url": "git+https://github.com/ahmadraza100/ai-trust-score.git"
   },
   "bugs": {
-    "url": "https://github.com/ahmadraza/ai-trust-score/issues"
+    "url": "https://github.com/ahmadraza100/ai-trust-score/issues"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
-  "homepage": "https://github.com/ahmadraza/ai-trust-score#readme",
+  "homepage": "https://github.com/ahmadraza100/ai-trust-score#readme",
   "devDependencies": {
     "@types/node": "^20.4.2",
     "ts-node": "^10.9.1",
