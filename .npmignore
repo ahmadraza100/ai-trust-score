@@ -1,0 +1,12 @@
+# Exclude source, tests, and development artifacts from the published package
+src/
+test/
+.github/
+examples/
+samples*.jsonl
+results*.jsonl
+report*.html
+.vscode/
+*.log
+node_modules/
+dist/**/*.map
