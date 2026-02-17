@@ -1,6 +1,10 @@
-import { GuardConfig, GuardReport } from "../types";
-import '../detectors/hallucination';
-import '../detectors/overconfidence';
-import '../detectors/numeric';
-import '../detectors/inconsistency';
-export declare function validateLLM(output: string | object, config?: GuardConfig): GuardReport;
+export const __esModule: boolean;
+export function validateLLM(output: any, config?: {}): {
+    score: number;
+    issues: (import("..").Issue | {
+        type: string;
+        severity: string;
+        message: string;
+    })[];
+    summary: string;
+};

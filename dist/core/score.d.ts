@@ -1,2 +1,2 @@
-import { Issue } from "../types";
-export declare function computeScore(issues: Issue[]): number;
+export const __esModule: boolean;
+export function computeScore(issues: any): number;

@@ -9,3 +9,4 @@ report*.html
 *.log
 node_modules/
 dist/**/*.map
+/dist

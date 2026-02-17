@@ -1,4 +1,5 @@
-export declare function validateSchema(data: object, schema: object): {
+export const __esModule: boolean;
+export function validateSchema(data: any, schema: any): {
     valid: boolean;
-    errors: string[];
+    errors: any;
 };

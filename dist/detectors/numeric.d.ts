@@ -1,3 +1,6 @@
-import { Issue } from "../types";
-import { GuardConfig } from '../types';
-export declare function detectNumeric(text: string, config?: GuardConfig): Issue[];
+export const __esModule: boolean;
+export function detectNumeric(text: any, config: any): {
+    type: string;
+    severity: string;
+    message: string;
+}[];

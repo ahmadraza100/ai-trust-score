@@ -1,3 +1,6 @@
-import { Issue } from "../types";
-import { GuardConfig } from '../types';
-export declare function detectHallucination(text: string, config?: GuardConfig): Issue[];
+export const __esModule: boolean;
+export function detectHallucination(text: any, config: any): {
+    type: any;
+    severity: any;
+    message: any;
+}[];

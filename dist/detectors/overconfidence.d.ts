@@ -1,2 +1,6 @@
-import { Issue, GuardConfig } from "../types";
-export declare function detectOverconfidence(text: string, config?: GuardConfig): Issue[];
+export const __esModule: boolean;
+export function detectOverconfidence(text: any, config: any): {
+    type: any;
+    severity: any;
+    message: string;
+}[];
