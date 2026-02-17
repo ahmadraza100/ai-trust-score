@@ -10,9 +10,9 @@ const validate_1 = require("./core/validate");
 const chalk_1 = __importDefault(require("chalk"));
 const cli_table3_1 = __importDefault(require("cli-table3"));
 function printUsage() {
-    console.log(chalk_1.default.bold('trustscore CLI'));
-    console.log('Usage: trustscore check --file <path> [--threshold <number>]');
-    console.log('Or: cat output.txt | trustscore check --stdin');
+    console.log(chalk_1.default.bold('ai-trust-score CLI'));
+    console.log('Usage: ai-trust-score check --file <path> [--threshold <number>]');
+    console.log('Or: cat output.txt | ai-trust-score check --stdin');
 }
 function colorForSeverity(s) {
     if (s === 'high')

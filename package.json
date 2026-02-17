@@ -1,7 +1,7 @@
 {
-  "name": "trustscore",
+  "name": "ai-trust-score",
   "version": "0.1.0",
-  "description": "trustscore — deterministic validator for LLM outputs (schema, heuristics, consistency checks)",
+  "description": "ai-trust-score — deterministic validator for LLM outputs (schema, heuristics, consistency checks)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -12,15 +12,15 @@
     "demo": "node ./dist/demo.js"
   },
   "keywords": ["llm","validator","schema","hallucination","offline","safety","audit"],
-  "author": "trustscore Contributors <contributors@trustscore.dev>",
+  "author": "ai-trust-score Contributors <contributors@ai-trust-score.dev>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ahmadraza/trustscore.git"
+    "url": "git+https://github.com/ahmadraza/ai-trust-score.git"
   },
   "bugs": {
-    "url": "https://github.com/ahmadraza/trustscore/issues"
+    "url": "https://github.com/ahmadraza/ai-trust-score/issues"
   },
-  "homepage": "https://github.com/ahmadraza/trustscore#readme",
+  "homepage": "https://github.com/ahmadraza/ai-trust-score#readme",
   "devDependencies": {
     "@types/node": "^20.4.2",
     "ts-node": "^10.9.1",
@@ -28,7 +28,7 @@
     "vitest": "^1.3.0"
   },
   "bin": {
-    "trustscore": "dist/cli.js"
+    "ai-trust-score": "dist/cli.js"
   },
   "files": ["dist","README.md"],
   "engines": {

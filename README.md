@@ -1,16 +1,16 @@
-# trustscore — deterministic, local validator for LLM outputs
+# ai-trust-score — deterministic, local validator for LLM outputs
 
-Trustscore helps teams detect and block common, deterministic problems in model-generated text and structured outputs. It's designed to run locally (no external APIs), in CI pipelines, or inside backend services that produce or relay LLM responses. The goal is to give you small, auditable reports that help automate gating, auditing, and monitoring of LLM outputs.
+ai-trust-score helps teams detect and block common, deterministic problems in model-generated text and structured outputs. It's designed to run locally (no external APIs), in CI pipelines, or inside backend services that produce or relay LLM responses. The goal is to give you small, auditable reports that help automate gating, auditing, and monitoring of LLM outputs.
 
-This README is intentionally comprehensive: quickstart, programmatic examples (CommonJS and ESM), how to apply trustscore to API responses, CLI/batch usage, an illustrative report, configuration options, recommended policies, and contribution notes.
+This README is intentionally comprehensive: quickstart, programmatic examples (CommonJS and ESM), how to apply ai-trust-score to API responses, CLI/batch usage, an illustrative report, configuration options, recommended policies, and contribution notes.
 
-Why trustscore
+Why ai-trust-score
 
 - Deterministic and auditable — no external black-box calls.
 - Low operational cost — runs on your infrastructure.
 - Extensible — add domain-specific JSON rule packs or custom detectors.
 
-What trustscore checks (examples)
+What ai-trust-score checks (examples)
 
 - Schema validation: verify JSON outputs conform to your schema.
 - Numeric consistency: flag mismatched percentages, impossible arithmetic, or inconsistent ranges.
@@ -21,16 +21,16 @@ What trustscore checks (examples)
 Quick install
 
 ```bash
-npm install trustscore
+npm install ai-trust-score
 # or
-yarn add trustscore
+yarn add ai-trust-score
 ```
 
 Programmatic usage — CommonJS (server-side)
 
 ```js
 // Import the validator and run it on a single string output
-const { validateLLM } = require('trustscore');
+const { validateLLM } = require('ai-trust-score');
 
 const text = 'The product revenue grew 20% from 100 to 150.';
 const report = validateLLM(text, {
@@ -45,13 +45,13 @@ console.log(report.issues);  // array of issues
 Programmatic usage — ESM / TypeScript
 
 ```ts
-import { validateLLM } from 'trustscore';
+import { validateLLM } from 'ai-trust-score';
 
 const report = validateLLM('The capital of France is Berlin.', { detectors: { hallucination: true } });
 console.log(report);
 ```
 
-Applying trustscore to API responses (recommended patterns)
+Applying ai-trust-score to API responses (recommended patterns)
 
 Inline validation (explicit)
 
@@ -67,14 +67,14 @@ Middleware pattern (convenience)
 
 ```js
 import express from 'express';
-import { llmGuardMiddleware } from 'trustscore';
+import { llmGuardMiddleware } from 'ai-trust-score';
 
 const app = express();
 app.use(express.json());
 
 app.post('/generate', llmGuardMiddleware({ threshold: 80 }), (req, res) => {
   const { allowed, report, output } = res.locals;
-  if (!allowed) return res.status(422).json({ error: 'Blocked by trustscore', report });
+  if (!allowed) return res.status(422).json({ error: 'Blocked by ai-trust-score', report });
   res.json({ reply: output, report });
 });
 ```
@@ -86,17 +86,17 @@ Policy notes
 
 CLI & batch usage
 
-The package exposes a small CLI for ad-hoc checks and a batch mode for audits. Use the published package via `npx trustscore` or install it locally.
+The package exposes a small CLI for ad-hoc checks and a batch mode for audits. Use the published package via `npx ai-trust-score` or install it locally.
 
 ```bash
 # Human-friendly table
-npx trustscore check --file path/to/output.txt
+npx ai-trust-score check --file path/to/output.txt
 
 # Machine-readable JSON
-npx trustscore check --file path/to/output.txt --json
+npx ai-trust-score check --file path/to/output.txt --json
 
 # Batch audit (JSONL -> results + HTML summary)
-npx trustscore batch --file samples.jsonl --out results.jsonl --parallel 8 --html report.html
+npx ai-trust-score batch --file samples.jsonl --out results.jsonl --parallel 8 --html report.html
 ```
 
 Illustration — sample GuardReport
