@@ -27,7 +27,7 @@ function llmGuardMiddleware(opts = {}) {
             const { allowed, report } = validateAndDecide(text, config, threshold);
             req.llmGuardReport = report;
             if (!allowed) {
-                return res.status(422).json({ error: 'Output failed VerifAI validation', report });
+                return res.status(422).json({ error: 'Output failed trustscore validation', report });
             }
             next();
         }

@@ -10,9 +10,9 @@ const validate_1 = require("./core/validate");
 const chalk_1 = __importDefault(require("chalk"));
 const cli_table3_1 = __importDefault(require("cli-table3"));
 function printUsage() {
-    console.log(chalk_1.default.bold('verifai CLI'));
-    console.log('Usage: verifai check --file <path> [--threshold <number>]');
-    console.log('Or: cat output.txt | verifai check --stdin');
+    console.log(chalk_1.default.bold('trustscore CLI'));
+    console.log('Usage: trustscore check --file <path> [--threshold <number>]');
+    console.log('Or: cat output.txt | trustscore check --stdin');
 }
 function colorForSeverity(s) {
     if (s === 'high')

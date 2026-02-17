@@ -103,7 +103,7 @@ async function main() {
         console.log('Severity counts:', res.severityCounts);
         if (args.html) {
             const htmlFile = path_1.default.resolve(process.cwd(), args.html);
-            const html = `<!doctype html><html><head><meta charset="utf-8"><title>VerifAI report</title><style>body{font-family:Arial,Helvetica,sans-serif}table{border-collapse:collapse;width:100%}td,th{border:1px solid #ddd;padding:8px}th{background:#f2f2f2}</style></head><body><h1>VerifAI batch report</h1><p>Total: ${res.total} — Average score: ${res.avgScore.toFixed(2)}</p><table><thead><tr><th>ID</th><th>Score</th><th>Text</th><th>Issues</th></tr></thead><tbody>${res.htmlRows.join('')}</tbody></table></body></html>`;
+            const html = `<!doctype html><html><head><meta charset="utf-8"><title>trustscore report</title><style>body{font-family:Arial,Helvetica,sans-serif}table{border-collapse:collapse;width:100%}td,th{border:1px solid #ddd;padding:8px}th{background:#f2f2f2}</style></head><body><h1>trustscore batch report</h1><p>Total: ${res.total} — Average score: ${res.avgScore.toFixed(2)}</p><table><thead><tr><th>ID</th><th>Score</th><th>Text</th><th>Issues</th></tr></thead><tbody>${res.htmlRows.join('')}</tbody></table></body></html>`;
             fs_1.default.writeFileSync(htmlFile, html, 'utf-8');
             console.log('Wrote HTML report to', htmlFile);
         }

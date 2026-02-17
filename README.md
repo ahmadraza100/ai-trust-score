@@ -1,16 +1,16 @@
-# VerifAI — deterministic, local validator for LLM outputs
+# trustscore — deterministic, local validator for LLM outputs
 
-VerifAI helps teams detect and block common, deterministic problems in model-generated text and structured outputs. It's designed to run locally (no external APIs), in CI pipelines, or inside backend services that produce or relay LLM responses. The goal is to give you small, auditable reports that help automate gating, auditing, and monitoring of LLM outputs.
+Trustscore helps teams detect and block common, deterministic problems in model-generated text and structured outputs. It's designed to run locally (no external APIs), in CI pipelines, or inside backend services that produce or relay LLM responses. The goal is to give you small, auditable reports that help automate gating, auditing, and monitoring of LLM outputs.
 
-This README is intentionally comprehensive: quickstart, programmatic examples (CommonJS and ESM), how to apply VerifAI to API responses, CLI/batch usage, an illustrative report, configuration options, recommended policies, and contribution notes.
+This README is intentionally comprehensive: quickstart, programmatic examples (CommonJS and ESM), how to apply trustscore to API responses, CLI/batch usage, an illustrative report, configuration options, recommended policies, and contribution notes.
 
-Why VerifAI
+Why trustscore
 
 - Deterministic and auditable — no external black-box calls.
 - Low operational cost — runs on your infrastructure.
 - Extensible — add domain-specific JSON rule packs or custom detectors.
 
-What VerifAI checks (examples)
+What trustscore checks (examples)
 
 - Schema validation: verify JSON outputs conform to your schema.
 - Numeric consistency: flag mismatched percentages, impossible arithmetic, or inconsistent ranges.
@@ -21,16 +21,16 @@ What VerifAI checks (examples)
 Quick install
 
 ```bash
-npm install verifai
+npm install trustscore
 # or
-yarn add verifai
+yarn add trustscore
 ```
 
 Programmatic usage — CommonJS (server-side)
 
 ```js
 // Import the validator and run it on a single string output
-const { validateLLM } = require('verifai');
+const { validateLLM } = require('trustscore');
 
 const text = 'The product revenue grew 20% from 100 to 150.';
 const report = validateLLM(text, {
@@ -45,13 +45,13 @@ console.log(report.issues);  // array of issues
 Programmatic usage — ESM / TypeScript
 
 ```ts
-import { validateLLM } from 'verifai';
+import { validateLLM } from 'trustscore';
 
 const report = validateLLM('The capital of France is Berlin.', { detectors: { hallucination: true } });
 console.log(report);
 ```
 
-Applying VerifAI to API responses (recommended patterns)
+Applying trustscore to API responses (recommended patterns)
 
 Inline validation (explicit)
 
@@ -67,14 +67,14 @@ Middleware pattern (convenience)
 
 ```js
 import express from 'express';
-import { llmGuardMiddleware } from 'verifai';
+import { llmGuardMiddleware } from 'trustscore';
 
 const app = express();
 app.use(express.json());
 
 app.post('/generate', llmGuardMiddleware({ threshold: 80 }), (req, res) => {
   const { allowed, report, output } = res.locals;
-  if (!allowed) return res.status(422).json({ error: 'Blocked by VerifAI', report });
+  if (!allowed) return res.status(422).json({ error: 'Blocked by trustscore', report });
   res.json({ reply: output, report });
 });
 ```
@@ -86,17 +86,17 @@ Policy notes
 
 CLI & batch usage
 
-The package exposes a small CLI for ad-hoc checks and a batch mode for audits. Use the published package via `npx verifai` or install it locally.
+The package exposes a small CLI for ad-hoc checks and a batch mode for audits. Use the published package via `npx trustscore` or install it locally.
 
 ```bash
 # Human-friendly table
-npx verifai check --file path/to/output.txt
+npx trustscore check --file path/to/output.txt
 
 # Machine-readable JSON
-npx verifai check --file path/to/output.txt --json
+npx trustscore check --file path/to/output.txt --json
 
 # Batch audit (JSONL -> results + HTML summary)
-npx verifai batch --file samples.jsonl --out results.jsonl --parallel 8 --html report.html
+npx trustscore batch --file samples.jsonl --out results.jsonl --parallel 8 --html report.html
 ```
 
 Illustration — sample GuardReport
@@ -142,27 +142,6 @@ const custom = {
 const r = validateLLM('The capital of Mars is Olympus City.', { customRules: custom });
 ```
 
-Best practices & edge cases
-
-- Empty or null outputs: treat as a special case (many policies opt to block or re-generate).
-- Very large outputs: validate in slices or in a background worker to avoid blocking request threads.
-- Streaming responses: validate on completion or validate stable substrings as they arrive.
-- Always persist `GuardReport`s for auditing and trending.
-
-Contributing and maintenance
-
-- To add detectors or curated rule packs (finance, healthcare), open an issue or PR and include unit tests and rule pack JSON.
-- For maintainability, keep a development branch with TypeScript sources and tests if you plan to iterate detectors frequently.
-
-Publishing & verification
-
-- Verify the tarball contents with:
-
-```bash
-npm pack --dry-run
-```
-
-- Double-check `package.json` metadata (name, author, repository) before `npm publish`.
 
 License, support, and ethos
 
