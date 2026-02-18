@@ -10,5 +10,3 @@ report*.html
 node_modules/
 dist/**/*.map
 /dist
-dist
-/.npmrc
