@@ -1,48 +1,55 @@
 {
-  "name": "@ahmadraza100/ai-trust-score",
-  "version": "0.1.0",
-  "description": "ai-trust-score — deterministic validator for LLM outputs (schema, heuristics, consistency checks)",
-  "main": "src/index.js",
-  "types": "src/index.d.ts",
-  "scripts": {
-    "build": "if [ -d src ]; then tsc -p tsconfig.json; else echo 'no src, skip build'; fi",
-    "test": "vitest",
-    "prepare": "echo 'skip build on pack'",
-    "cli": "node ./dist/cli.js",
-    "demo": "node ./dist/demo.js"
-  },
-  "keywords": ["llm","validator","schema","hallucination","offline","safety","audit"],
-  "author": "ai-trust-score Contributors <contributors@ai-trust-score.dev>",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ahmadraza100/ai-trust-score.git"
-  },
-  "bugs": {
-    "url": "https://github.com/ahmadraza100/ai-trust-score/issues"
-  },
-  "homepage": "https://github.com/ahmadraza100/ai-trust-score#readme",
-  "devDependencies": {
-    "@types/node": "^20.4.2",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.1.6",
-    "vitest": "^1.3.0"
-  },
-  "bin": {
-    "ai-trust-score": "src/cli.js"
-  },
-  "files": ["src","README.md"],
-  "engines": {
-    "node": ">=18"
-  },
-  "license": "MIT",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
-  "dependencies": {
-    "ajv": "^8.12.0",
-    "chalk": "^4.1.2",
-    "cli-table3": "^0.6.0"
-  }
+    "name": "@ahmadraza100/ai-trust-score",
+    "version": "1.0.3",
+    "description": "ai-trust-score — deterministic validator for LLM outputs (schema, heuristics, consistency checks)",
+    "main": "src/index.js",
+    "types": "src/index.d.ts",
+    "scripts": {
+        "build": "if [ -d src ]; then tsc -p tsconfig.json; else echo 'no src, skip build'; fi",
+        "test": "vitest",
+        "prepare": "echo 'skip build on pack'",
+        "cli": "node ./src/cli.js",
+        "demo": "node ./src/demo.js",
+        "publish:github": "node ./scripts/publish-github.js"
+    },
+    "keywords": [
+        "llm",
+        "validator",
+        "schema",
+        "hallucination",
+        "offline",
+        "safety",
+        "audit"
+    ],
+    "author": "ai-trust-score Contributors <contributors@ai-trust-score.dev>",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ahmadraza100/ai-trust-score.git"
+    },
+    "bugs": {
+        "url": "https://github.com/ahmadraza100/ai-trust-score/issues"
+    },
+    "homepage": "https://github.com/ahmadraza100/ai-trust-score#readme",
+    "devDependencies": {
+        "@types/node": "^20.4.2",
+        "ts-node": "^10.9.1",
+        "typescript": "^5.1.6",
+        "vitest": "^1.3.0"
+    },
+    "bin": {
+        "ai-trust-score": "src/cli.js"
+    },
+    "files": [
+        "src",
+        "README.md"
+    ],
+    "engines": {
+        "node": ">=18"
+    },
+    "license": "MIT",
+    "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"    },
+    "dependencies": {
+        "ajv": "^8.12.0"
+    }
 }
-
-
