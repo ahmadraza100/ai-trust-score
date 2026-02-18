@@ -7,8 +7,31 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
 const validate_1 = require("./core/validate");
-const chalk_1 = __importDefault(require("chalk"));
-const cli_table3_1 = __importDefault(require("cli-table3"));
+// lightweight replacements for chalk and cli-table3 to avoid extra dependencies
+const chalk_1 = {
+    default: {
+        bold: (s) => s,
+        red: (s) => s,
+        yellow: (s) => s,
+        gray: (s) => s,
+        dim: (s) => s,
+        green: (s) => s,
+    }
+};
+
+function makeTable(rows, head) {
+    // simple tabular output: print header then rows separated by |
+    const cols = head || [];
+    const lines = [];
+    if (cols.length) {
+        lines.push(cols.join(' | '));
+        lines.push(cols.map(() => '---').join(' | '));
+    }
+    for (const r of rows) {
+        lines.push(r.map(String).join(' | '));
+    }
+    return lines.join('\n');
+}
 function printUsage() {
     console.log(chalk_1.default.bold('ai-trust-score CLI'));
     console.log('Usage: ai-trust-score check --file <path> [--threshold <number>]');
@@ -80,12 +103,12 @@ async function main() {
         console.log(chalk_1.default.green('No issues detected.'));
     }
     else {
-        const table = new cli_table3_1.default({ head: ['Type', 'Severity', 'Message'] });
+        const rows = [];
         for (const it of report.issues) {
             const color = colorForSeverity(it.severity);
-            table.push([it.type, color(it.severity), it.message]);
+            rows.push([it.type, color(it.severity), it.message]);
         }
-        console.log(table.toString());
+        console.log(makeTable(rows, ['Type', 'Severity', 'Message']));
     }
     if (threshold && report.score < threshold) {
         process.exit(3);

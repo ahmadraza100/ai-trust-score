@@ -1,0 +1,27 @@
+{
+  "hallucination": [
+    {
+      "pattern": "\\b(Riverton Institute|Falsford University|Nowhere Labs)\\b",
+      "flags": "i",
+      "message": "Suspicious named institution detected. This may be a hallucinated organization.",
+      "severity": "low",
+      "type": "hallucination"
+    }
+  ],
+  "overconfidence": [
+    {
+      "pattern": "\\b(without a doubt|definitely|absolutely|certainly|always)\\b",
+      "flags": "i",
+      "message": "Strong certainty marker detected (overconfident language).",
+      "severity": "medium",
+      "type": "confidence"
+    },
+    {
+      "pattern": "\\b(experts say|research shows|studies show)\\b",
+      "flags": "i",
+      "message": "Appeal to authority detected (may indicate unsupported claim).",
+      "severity": "low",
+      "type": "confidence"
+    }
+  ]
+}

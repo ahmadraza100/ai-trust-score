@@ -6,8 +6,30 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
 const validate_1 = require("./core/validate");
-const chalk_1 = __importDefault(require("chalk"));
-const cli_table3_1 = __importDefault(require("cli-table3"));
+// lightweight replacements for chalk and cli-table3 to avoid extra dependencies
+const chalk_1 = {
+    default: {
+        bold: (s) => s,
+        red: (s) => s,
+        yellow: (s) => s,
+        gray: (s) => s,
+        dim: (s) => s,
+        green: (s) => s,
+    }
+};
+
+function makeTable(rows, head) {
+    const cols = head || [];
+    const lines = [];
+    if (cols.length) {
+        lines.push(cols.join(' | '));
+        lines.push(cols.map(() => '---').join(' | '));
+    }
+    for (const r of rows) {
+        lines.push(r.map(String).join(' | '));
+    }
+    return lines.join('\n');
+}
 async function runDemo() {
     const p = path_1.default.resolve(process.cwd(), 'examples', 'sample_output.txt');
     if (!fs_1.default.existsSync(p)) {
@@ -23,12 +45,12 @@ async function runDemo() {
         console.log(chalk_1.default.green('No issues detected.'));
     }
     else {
-        const table = new cli_table3_1.default({ head: ['Type', 'Severity', 'Message'] });
+        const rows = [];
         for (const it of report.issues) {
             const color = it.severity === 'high' ? chalk_1.default.red : it.severity === 'medium' ? chalk_1.default.yellow : chalk_1.default.gray;
-            table.push([it.type, color(it.severity), it.message]);
+            rows.push([it.type, color(it.severity), it.message]);
         }
-        console.log(table.toString());
+        console.log(makeTable(rows, ['Type', 'Severity', 'Message']));
     }
 }
 runDemo().catch(e => { console.error(e); process.exit(1); });

@@ -1,6 +1,5 @@
-src/
-test/
 .github/
+./dist
 examples/
 samples*.jsonl
 results*.jsonl
@@ -8,5 +7,5 @@ report*.html
 .vscode/
 *.log
 node_modules/
-dist/**/*.map
-/dist
+
+
