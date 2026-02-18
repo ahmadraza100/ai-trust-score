@@ -1,9 +1,16 @@
 {
   "hallucination": [
     {
-      "pattern": "\\b(Riverton Institute|Falsford University|Nowhere Labs)\\b",
+      "pattern": "\\b(Riverton Institute|Falsford University|Nowhere Labs|Springfield Institute|Central City Research)\\b",
       "flags": "i",
       "message": "Suspicious named institution detected. This may be a hallucinated organization.",
+      "severity": "low",
+      "type": "hallucination"
+    },
+    {
+      "pattern": "\\b(Institute for Advanced Studies|Fictional Research Center|Imaginary Lab)\\b",
+      "flags": "i",
+      "message": "Potentially fabricated institution name detected.",
       "severity": "low",
       "type": "hallucination"
     }
@@ -17,6 +24,13 @@
       "type": "confidence"
     },
     {
+      "pattern": "\\b(guaranteed|no question|undeniably|for sure|always true)\\b",
+      "flags": "i",
+      "message": "Extreme certainty phrase detected (overconfident).",
+      "severity": "medium",
+      "type": "confidence"
+    },
+    {
       "pattern": "\\b(experts say|research shows|studies show)\\b",
       "flags": "i",
       "message": "Appeal to authority detected (may indicate unsupported claim).",
@@ -24,4 +38,40 @@
       "type": "confidence"
     }
   ]
+  ,
+  "bias": [
+    {
+      "pattern": "\\b(obviously|no doubt|no-doubt|no doubt about it)\\b",
+      "flags": "i",
+      "message": "Loaded or emotionally charged phrase detected (bias).",
+      "severity": "low",
+      "type": "bias"
+    },
+    {
+      "pattern": "\\b(they are criminals|they are terrorists)\\b",
+      "flags": "i",
+      "message": "Dehumanizing or accusatory phrase detected (bias).",
+      "severity": "medium",
+      "type": "bias"
+    }
+  ],
+  "claims": [
+    {
+      "pattern": "\\b(according to|as reported by|reported by|source:)\\b",
+      "flags": "i",
+      "message": "Source-citation pattern detected near a claim.",
+      "severity": "low",
+      "type": "claim"
+    }
+  ],
+  "source": [
+    {
+      "pattern": "\\b(according to|as reported by|reported by|according to a report|the report states)\\b",
+      "flags": "i",
+      "message": "Vague source citation detected.",
+      "severity": "medium",
+      "type": "source"
+    }
+  ]
 }
+

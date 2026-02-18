@@ -29,11 +29,23 @@ function detectHallucination(text, config) {
         }
     }
     catch (e) { /* ignore */ }
+    const textUtils = require('../core/text');
     for (const r of merged) {
         try {
+            // try regex first
             const re = new RegExp(r.pattern, r.flags || 'i');
             if (re.test(text)) {
                 issues.push({ type: r.type || 'hallucination', severity: r.severity, message: r.message });
+                continue;
+            }
+            // best-effort: extract literal alternatives like (A|B|C) from pattern and fuzzy-match them
+            const alt = (r.pattern.match(/\(([^)]+)\)/) || [null, null])[1];
+            if (alt) {
+                const parts = alt.split('|').map(s => s.replace(/\\b/g, '').replace(/\\/g, '').trim()).filter(Boolean);
+                const matches = textUtils.containsAnyFuzzy(text, parts);
+                if (matches.length > 0) {
+                    issues.push({ type: r.type || 'hallucination', severity: r.severity, message: r.message });
+                }
             }
         }
         catch (e) {
