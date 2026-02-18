@@ -1,5 +1,5 @@
 {
-    "name": "ai-trust-score",
+    "name": "@ahmadraza100/ai-trust-score",
     "version": "1.0.4",
     "description": "ai-trust-score — deterministic validator for LLM outputs (schema, heuristics, consistency checks)",
     "main": "src/index.js",
@@ -48,7 +48,7 @@
     },
     "license": "MIT",
     "publishConfig": {
-        "registry": "https://registry.npmjs.org/"
+        "registry": "https://npm.pkg.github.com/"
     },
     "dependencies": {
         "ajv": "^8.12.0"
